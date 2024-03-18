@@ -1,24 +1,31 @@
 # aws-github-role
 
-This project contains a CloudFormation template that creates an IAM role for GitHub Actions. The role has specific policy statements and a trusted relationship as defined in the template.
+This project contains a CloudFormation template that creates a IAM roles for Idea Pool GitHub Actions. The roles has specific policy statements and a trusted relationship as defined in the template.
 
 ## Template Details
 
-The template takes two input parameters:
+The template takes one input parameters:
 
 - `GitHubAccount`: The GitHub account name
 
-The template creates a role with the following policy statements:
+The template creates a role for **AWS CDK actions** with the following policy statements:
 
 - `iam:PassRole` on all resources
 - `sts:AssumeRole` on all `cdk-*` roles
 
-The role has a trusted relationship with the GitHub Actions OIDC provider.
+The template also creates a role for **AWS CLI actions** with the following policies:
 
-The template has two outputs:
+- AWS managed policy `AmazonS3FullAccess`
+- `cloudformation:GetInvalidation` and `cloudformation:CreateInvalidation` on all resources
 
-- `RoleArn`: The ARN of the GitHub role
-- `RoleName`: The name of the GitHub role
+The roles have a trusted relationship with the GitHub Actions OIDC provider.
+
+The template has four outputs:
+
+- `GitHubCDKRoleArn`: The ARN of the CDK role
+- `GitHubCLIRoleArn`: The ARN of the CLI role
+- `GitHubCDKRoleName`: The name of the CDK role
+- `GitHubCLIRoleName`: The name of the CLI role
 
 ## Deployment
 
