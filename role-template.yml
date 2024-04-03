@@ -18,6 +18,8 @@ Resources:
               StringLike:
                 'token.actions.githubusercontent.com:sub': !Sub 'repo:${GitHubAccount}/*'
                 'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/AWSCloudFormationFullAccess'
       Policies:
         - PolicyName: GitHubCDKActionsPolicy
           PolicyDocument:
